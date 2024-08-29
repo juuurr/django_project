@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blog",
     "board",
-    "account",
+   # "account",
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "fisa_django.urls"
@@ -74,6 +77,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "fisa_django.wsgi.application"
 
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -111,12 +123,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 now = timezone.now()
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ko-kr"
 
 TIME_ZONE = 'Asia/Seoul'
 
 
-USE_I18N = True
+USE_I18N = True #번역역할
 
 USE_TZ = False
 
