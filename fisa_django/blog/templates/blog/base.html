@@ -34,18 +34,21 @@
                 </ul>
 
 
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated %}   
                 {# 로그인 상태이면 #}
                     {# 본인 ID #}
-                    {{ user.username }}
+                    <span class="text-secondary fw-bold"> <a href="{% url 'account_change_password' %}">{{ user.username }} </a> </span>&nbsp;
                     {# 로그아웃 버튼 #}
-                    <a href="#"><button value="로그아웃"></button></a>
+                    <a class="btn btn-secondary" href="{% url 'account_logout' %}" role="button">로그아웃</a>&nbsp;&nbsp;
+
                 {% else %}
                 {# 로그아웃 상태이면 #}
                     {# 로그인 버튼 #}
-                    <a href="/account/login"><button value="로그인"></button></a>
-                    {# 회원 가입 버튼 #}
-                    <a href="/account/signup"><button value="회원가입"></button></a>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#loginModal"><a href="{% url 'account_login' %}">로그인</a>
+
+                    {# 회원가입 버튼#}
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#singinModal"><a href="{% url 'account_signup' %}">회원가입</a>
+                    <!-- <a href="/account/signup"><button value="회원가입"></button></a> -->
                 {% endif %}
             </div>
         </div>
