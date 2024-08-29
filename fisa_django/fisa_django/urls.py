@@ -25,6 +25,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #localhost:8000/blog/실제blog/urls.py에 적힌 경로를 참조하게 됨
     path("blog/", include('blog.urls')),
+    path("account/", include('account.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
