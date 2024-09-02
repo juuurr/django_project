@@ -20,6 +20,8 @@ from django.urls import path, include
 # 이미지 업로드 필드를 위한 추가
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import include, path
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,6 +30,6 @@ urlpatterns = [
    # path("account/", include('account.urls')),
     path('accounts/', include('allauth.urls')),
     path("", include('blog.urls')),
-]
+] + debug_toolbar_urls()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

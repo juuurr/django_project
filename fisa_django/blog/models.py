@@ -34,13 +34,21 @@ class Post(models.Model):
     # CASCADE - User가 삭제되면 관련있는 Post 테이블의 모든 글이 삭제
     # SET_NULL - User가 삭제되면 관련있는 Post 테이블의 모든 글에 author 항목은 NULL로 바뀜
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
     tag = models.ManyToManyField(Tag)
+
+    file_upload = models.FileField(upload_to='blog/files/%Y/%m/%d/', blank=True)
+
+
 
     def __str__(self):
         return f'[[{self.pk}] {self.title}]'
 		
     def get_absolute_url(self): 
         return f'/blog/{self.pk}'
+    
+    def get_file_extension(self):
+        return f'{self.file_upload}'.split('.')[-1]
 
 
 
@@ -56,7 +64,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
-        return f'[[{self.pk}] {self.title}]'
+        return f'[[{self.pk}] {self.content}]'
 		
     def get_absolute_url(self): 
         return f'{self.post.get_absolute_url()}#comment-{self.pk}' # #을 단 이유 : html에서 ID 
