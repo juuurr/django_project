@@ -3,3 +3,4 @@ __pycachse__/
 migrations/
 db.sqlite3
 _media/
+.env
